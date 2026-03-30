@@ -1,0 +1,8 @@
+configuration {
+  modi: "window,run,drun";
+  show-icons: true;
+  font: "Inter 12";
+  drun-display-format: "{icon} {name}";
+}
+
+@theme "style"
