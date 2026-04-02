@@ -6,11 +6,11 @@
     "margin-left": 10,
     "margin-right": 10,
     "spacing": 10,
-    "modules-left": [
+    "modules-center": [
         "clock",
         "battery"
     ],
-    "modules-center": [
+    "modules-left": [
         "hyprland/workspaces"
     ],
     "modules-right": [
@@ -19,19 +19,7 @@
         "custom/button"
     ],
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "active": "",
-            "default": ""
-        },
-        "persistent-workspaces": {
-            "*": 5
-        }
+        "format": "{name}"
     },
     "clock": {
         "format": "  {:%H:%M}",
@@ -64,11 +52,11 @@
     },
     "network": {
         "format-wifi": "   {essid}",
-        "format-ethernet": "   {ipaddr}/{cidr}",
+        "format-ethernet": "   {ipaddr}",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠  Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "on-click": "networkmanager_dmenu"
     },
     "custom/volume": {
         "format": "   {}%",

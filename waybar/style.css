@@ -23,7 +23,8 @@ window#waybar {
 #workspaces button {
     padding: 0 8px;
     background-color: transparent;
-    color: #a6adc8;
+    color: #6c7086; /* Un color más apagado para los inactivos */
+    font-weight: 800;
 }
 
 #workspaces button:hover {
@@ -33,7 +34,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: #cba6f7;
+    color: #a6e3a1; /* Un verde vibrante para el foco */
 }
 
 #clock,
