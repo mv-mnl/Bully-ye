@@ -1,0 +1,51 @@
+$base: rgba(30, 30, 46, 0.95);
+$text: #cdd6f4;
+$accent: #f9e2af;
+$hover: #fab387;
+
+* {
+  all: unset;
+  font-family: 'Inter', 'JetBrainsMono Nerd Font', sans-serif;
+  font-weight: 600;
+}
+
+.volume-popup {
+  background-color: $base;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 15px 20px;
+  color: $text;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.volume-icon {
+  font-size: 24px;
+  color: $accent;
+  margin-bottom: 5px;
+}
+
+.volume-scale scale trough {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  min-height: 8px;
+  min-width: 180px;
+}
+
+.volume-scale scale trough highlight {
+  background-color: $accent;
+  border-radius: 10px;
+}
+
+.volume-scale scale trough slider {
+  background-color: white;
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
+  margin-top: -4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.volume-text {
+  font-size: 14px;
+  margin-top: 8px;
+}

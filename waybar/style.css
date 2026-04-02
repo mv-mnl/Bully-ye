@@ -1,1 +1,71 @@
-/nix/store/yacihs1mic13aq6j7qnxk43p8hp6m492-home-manager-files/.config/waybar/style.css
+* {
+    border: none;
+    border-radius: 0;
+    font-family: 'Inter', 'Roboto', 'JetBrainsMono Nerd Font', 'Font Awesome 6 Free', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: #cdd6f4;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.modules-left, .modules-center, .modules-right {
+    background-color: rgba(30, 30, 46, 0.85); /* Catppuccin Mocha Base */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #a6adc8;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: #f38ba8;
+}
+
+#workspaces button.active {
+    color: #cba6f7;
+}
+
+#clock,
+#network,
+#custom-volume,
+#custom-button,
+#battery {
+    padding: 0 15px;
+    margin: 4px 0;
+    color: #cdd6f4;
+}
+
+#clock {
+    color: #89b4fa;
+}
+
+#network {
+    color: #a6e3a1;
+}
+
+#custom-volume {
+    color: #f9e2af;
+}
+
+#custom-volume:hover {
+    color: #fab387;
+}
+
+#custom-button {
+    color: #f38ba8;
+}
+
+#custom-button:hover {
+    color: #f5c2e7;
+}
