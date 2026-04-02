@@ -1,4 +1,4 @@
-# ~/.zshrc - Base Configuration
+# ~/.zshrc - ZSH Configuration sin Oh My Zsh
 
 # --- History ---
 HISTFILE=~/.zsh_history
@@ -26,9 +26,13 @@ alias la='ls -A'
 alias update='sudo pacman -Syu'    
 alias shutdown='shutdown now'
 
+# --- Plugins (Instalados via pacman) ---
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-# --- Basic Prompt ---
-# Sets a simple colored prompt (user@host path %)
-PROMPT='%F{green}%n@%m%f %F{blue}%~%f %# '
+# --- Starship Prompt ---
+# Asegúrate de no tener ~/.config/starship.toml si quieres que use los valores por defecto (minimalistas)
+eval "$(starship init zsh)"
 
+# System fetch
 fastfetch

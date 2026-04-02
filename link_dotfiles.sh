@@ -40,7 +40,7 @@ create_symlink() {
 }
 
 echo -e "\n${BLUE}--- Directorios en ~/.config ---${NC}"
-for config in hypr waybar kitty nvim cava eww matugen rofi swaync; do
+for config in hypr waybar kitty nvim cava eww matugen rofi swaync networkmanager-dmenu; do
     if [ -e "$DOTFILES_DIR/$config" ]; then
         create_symlink "$DOTFILES_DIR/$config" "$CONFIG_DIR/$config"
     else
