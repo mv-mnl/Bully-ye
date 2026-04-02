@@ -31,3 +31,4 @@ alias shutdown='shutdown now'
 # Sets a simple colored prompt (user@host path %)
 PROMPT='%F{green}%n@%m%f %F{blue}%~%f %# '
 
+fastfetch

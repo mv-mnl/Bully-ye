@@ -22,6 +22,7 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "script-fail-notify": true,
+  "text-empty": "󰂚 que jopa",
   "widgets": [
     "title",
     "dnd",

@@ -95,3 +95,15 @@
   background: @fg-col2;
   color: @bg-col;
 }
+
+/* Empty state */
+.control-center-list-placeholder image {
+  opacity: 0;
+  color: transparent;
+}
+
+.control-center-list-placeholder label {
+  font-size: 60px;
+  color: @grey;
+  opacity: 0.8;
+}
