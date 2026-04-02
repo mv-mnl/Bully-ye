@@ -1,11 +1,33 @@
-#
-# ~/.bashrc
-#
+# ~/.zshrc - Base Configuration
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# --- History ---
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt append_history         # Append history list to the history file
+setopt share_history          # Share history between all sessions
+setopt hist_ignore_all_dups   # Ignore duplicates
+setopt hist_reduce_blanks     # Remove superfluous blanks
 
+# --- Auto-Completion ---
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' menu select # Use an interactive menu for completions
+setopt always_to_end               # Move cursor to end if word had one match
+
+# --- Keybindings ---
+bindkey -e                         # Emacs keybindings
+
+# --- Aliases ---
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
-source /usr/share/oh-my-zsh/oh-my-zsh.sh
+alias ll='ls -lah'
+alias la='ls -A'
+alias update='sudo pacman -Syu'    
+alias shutdown='shutdown now'
+
+
+# --- Basic Prompt ---
+# Sets a simple colored prompt (user@host path %)
+PROMPT='%F{green}%n@%m%f %F{blue}%~%f %# '
+
