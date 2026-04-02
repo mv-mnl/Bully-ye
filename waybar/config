@@ -7,20 +7,39 @@
     "margin-right": 10,
     "spacing": 10,
     "modules-center": [
+        "custom/nvim",
         "clock",
         "battery"
     ],
     "modules-left": [
-        "hyprland/workspaces"
+        "custom/spotify",
+        "custom/spotify-prev",
+        "custom/spotify-play",
+        "custom/spotify-next"        
     ],
     "modules-right": [
-        "network",
+        "hyprland/window",
         "custom/volume",
-        "custom/button"
+        "custom/button",
+        "network",
+        "custom/notification-daemon"
     ],
-    "hyprland/workspaces": {
-        "format": "{name}"
+
+    "hyprland/window": {
+        "format": " ",
+        "icon": true,
+        "icon-size": 22,
+        "tooltip": true,
+        "tooltip-format": "{title}"
     },
+
+    "custom/nvim": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "kitty nvim"
+    },
+
+
     "clock": {
         "format": "  {:%H:%M}",
         "format-alt": "  {:%A, %B %d, %Y}",
@@ -39,6 +58,26 @@
             }
         }
     },
+    "custom/notification-daemon": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
     "battery": {
         "states": {
             "warning": 30,
@@ -52,11 +91,45 @@
     },
     "network": {
         "format-wifi": "   {essid}",
-        "format-ethernet": "   {ipaddr}",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "󰈀   {ipaddr}",
+        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+        "format-linked": "{ifname} (No IP) 󰈀",
         "format-disconnected": "⚠  Disconnected",
         "on-click": "networkmanager_dmenu"
+    },
+    "custom/spotify": {
+        "format": "{}",
+        "exec": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify metadata --format '   {{artist}} - {{title}}' 2>/dev/null || echo '   Spotify'; else echo ' '; fi",
+        "interval": 2,
+        "on-click": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify play-pause; else spotify & fi",
+        "on-click-right": "playerctl --player=spotify next",
+        "on-click-middle": "playerctl --player=spotify previous",
+        "on-scroll-up": "playerctl --player=spotify next",
+        "on-scroll-down": "playerctl --player=spotify previous",
+        "max-length": 50,
+        "tooltip": true,
+        "tooltip-format": "Spotify"
+    },
+    "custom/spotify-prev": {
+        "format": "{}",
+        "exec": "if pgrep -i spotify >/dev/null; then echo ''; else echo ''; fi",
+        "interval": 2,
+        "on-click": "playerctl previous",
+        "tooltip": false
+    },
+    "custom/spotify-play": {
+        "format": "{}",
+        "exec": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify status 2>/dev/null | grep -q 'Playing' && echo '' || echo ''; else echo ''; fi",
+        "interval": 1,
+        "on-click": "playerctl play-pause",
+        "tooltip": false
+    },
+    "custom/spotify-next": {
+        "format": "{}",
+        "exec": "if pgrep -i spotify >/dev/null; then echo ''; else echo ''; fi",
+        "interval": 2,
+        "on-click": "playerctl next",
+        "tooltip": false
     },
     "custom/volume": {
         "format": "   {}%",

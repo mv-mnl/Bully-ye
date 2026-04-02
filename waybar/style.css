@@ -41,10 +41,15 @@ window#waybar {
 #network,
 #custom-volume,
 #custom-button,
+#custom-notification-daemon,
 #battery {
     padding: 0 15px;
     margin: 4px 0;
     color: #cdd6f4;
+}
+
+#custom-spotify {
+    color: #1db954; /* Color verde de Spotify */
 }
 
 #clock {
