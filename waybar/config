@@ -12,15 +12,14 @@
         "battery"
     ],
     "modules-left": [
-        "custom/spotify",
-        "custom/spotify-prev",
-        "custom/spotify-play",
-        "custom/spotify-next"        
+        "image#album-art",
+        "custom/spotify"
     ],
     "modules-right": [
         "hyprland/window",
         "custom/volume",
         "custom/button",
+        "custom/waypaper",
         "network",
         "custom/notification-daemon"
     ],
@@ -97,38 +96,18 @@
         "format-disconnected": "⚠  Disconnected",
         "on-click": "networkmanager_dmenu"
     },
+    "image#album-art": {
+        "exec": "if [ -f /tmp/waybar-cover.jpeg ]; then echo /tmp/waybar-cover.jpeg; else echo ''; fi",
+        "size": 32,
+        "interval": 2,
+        "on-click": "playerctl play-pause"
+    },
     "custom/spotify": {
         "format": "{}",
-        "exec": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify metadata --format '   {{artist}} - {{title}}' 2>/dev/null || echo '   Spotify'; else echo ' '; fi",
-        "interval": 2,
-        "on-click": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify play-pause; else spotify & fi",
-        "on-click-right": "playerctl --player=spotify next",
-        "on-click-middle": "playerctl --player=spotify previous",
-        "on-scroll-up": "playerctl --player=spotify next",
-        "on-scroll-down": "playerctl --player=spotify previous",
-        "max-length": 50,
-        "tooltip": true,
-        "tooltip-format": "Spotify"
-    },
-    "custom/spotify-prev": {
-        "format": "{}",
-        "exec": "if pgrep -i spotify >/dev/null; then echo ''; else echo ''; fi",
-        "interval": 2,
-        "on-click": "playerctl previous",
-        "tooltip": false
-    },
-    "custom/spotify-play": {
-        "format": "{}",
-        "exec": "if pgrep -i spotify >/dev/null; then playerctl --player=spotify status 2>/dev/null | grep -q 'Playing' && echo '' || echo ''; else echo ''; fi",
+        "exec": "/home/manuelmv/Bully-ye/waybar/scrips.sh",
+        "return-type": "json",
         "interval": 1,
         "on-click": "playerctl play-pause",
-        "tooltip": false
-    },
-    "custom/spotify-next": {
-        "format": "{}",
-        "exec": "if pgrep -i spotify >/dev/null; then echo ''; else echo ''; fi",
-        "interval": 2,
-        "on-click": "playerctl next",
         "tooltip": false
     },
     "custom/volume": {
@@ -145,5 +124,11 @@
         "tooltip": true,
         "tooltip-format": "Lanzar Bottom (btm)",
         "on-click": "kitty btm"
+    },
+    "custom/waypaper": {
+        "format": " ",
+        "tooltip": true,
+        "tooltip-format": "Cambiar Fondo (Waypaper)",
+        "on-click": "waypaper"
     }
 }

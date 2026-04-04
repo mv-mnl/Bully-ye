@@ -1,49 +1,11 @@
-# ~/.zshrc - ZSH Configuration sin Oh My Zsh
+# ~/.zshrc - ZSH Configuration Modularizada & Súper Vitaminada
 
-# --- History ---
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt append_history         # Append history list to the history file
-setopt share_history          # Share history between all sessions
-setopt hist_ignore_all_dups   # Ignore duplicates
-setopt hist_reduce_blanks     # Remove superfluous blanks
+ZSH_CONFIG_DIR="$HOME/Bully-ye/zsh"
 
-# --- Auto-Completion ---
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' menu select # Use an interactive menu for completions
-setopt always_to_end               # Move cursor to end if word had one match
-
-# --- Keybindings ---
-bindkey -e                         # Emacs keybindings
-
-# --- Aliases ---
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias ll='ls -lah'
-alias la='ls -A'
-alias update='sudo pacman -Syu'    
-alias shutdown='shutdown now'
-
-# --- Plugins (Instalados via pacman) ---
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-# --- Starship Prompt ---
-# Asegúrate de no tener ~/.config/starship.toml si quieres que use los valores por defecto (minimalistas)
-eval "$(starship init zsh)"
-
-
-#comandos de git
-
-# git add -A y git commit  a la vez mandandando el mensaje de commit
-
-alias gc='git add -A && git commit -m'
-
-
-
-
-
-# System fetch
-#fastfetch
+# Cargar módulos en orden lógico
+source "$ZSH_CONFIG_DIR/history.zsh"
+source "$ZSH_CONFIG_DIR/completion.zsh"
+source "$ZSH_CONFIG_DIR/keybindings.zsh"
+source "$ZSH_CONFIG_DIR/aliases.zsh"
+source "$ZSH_CONFIG_DIR/plugins.zsh"
+source "$ZSH_CONFIG_DIR/prompt.zsh"
