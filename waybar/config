@@ -129,6 +129,6 @@
         "format": " ",
         "tooltip": true,
         "tooltip-format": "Cambiar Fondo (Waypaper)",
-        "on-click": "waypaper"
+        "on-click": "~/Bully-ye/wallpaper-carousel/run-carousel.sh"
     }
 }
