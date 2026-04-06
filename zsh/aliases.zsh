@@ -24,8 +24,8 @@ alias gc='git add -A && git commit -m'
 alias gp='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias gs='git status'
 alias gl='git log --oneline --decorate --graph'
-alias gcm ='git switch'
-alias gcr ='git switch -c'
+alias gcm='git switch'
+alias gcr='git switch -c'
 
 # --- Utilidades y Navegación Rápidas ---
 alias ..='cd ..'
