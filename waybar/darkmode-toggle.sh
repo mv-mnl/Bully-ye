@@ -4,6 +4,10 @@
 
 STATE_FILE="/tmp/waybar-darkmode"
 LOG_FILE="/tmp/darkmode.log"
+FIREFOX_CHROME="/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome"
+# Matugen generates these processed files (with real hex colors, not {{}} placeholders)
+FIREFOX_DARK_CSS="$FIREFOX_CHROME/userChrome-dark.css"
+FIREFOX_LIGHT_CSS="$FIREFOX_CHROME/userChrome-light.css"
 
 exec 1> >(tee -a "$LOG_FILE") 2>&1
 
@@ -48,6 +52,15 @@ if [ "$CURRENT" = "dark" ]; then
         matugen image "$WALLPAPER" --type scheme-tonal-spot -m light &>/dev/null
         bash /home/manuelmv/Bully-ye/wallpaper-carousel/matugen_reload.sh &
     fi
+
+    # Firefox: apply light userChrome.css (needs Firefox restart to take effect)
+    # Note: Matugen must have run at least once with a wallpaper to generate this file
+    if [ -f "$FIREFOX_LIGHT_CSS" ]; then
+        cp "$FIREFOX_LIGHT_CSS" "$FIREFOX_CHROME/userChrome.css"
+        echo "Firefox: applied light theme to $FIREFOX_CHROME/userChrome.css"
+    else
+        echo "Firefox: light CSS not yet generated (set a wallpaper first)"
+    fi
 else
     # Switch to DARK (night)
     NEW_STATE="dark"
@@ -77,6 +90,15 @@ else
         echo "Regenerating Matugen (dark)"
         matugen image "$WALLPAPER" --type scheme-tonal-spot -m dark &>/dev/null
         bash /home/manuelmv/Bully-ye/wallpaper-carousel/matugen_reload.sh &
+    fi
+
+    # Firefox: apply dark userChrome.css (needs Firefox restart to take effect)
+    # Note: Matugen must have run at least once with a wallpaper to generate this file
+    if [ -f "$FIREFOX_DARK_CSS" ]; then
+        cp "$FIREFOX_DARK_CSS" "$FIREFOX_CHROME/userChrome.css"
+        echo "Firefox: applied dark theme to $FIREFOX_CHROME/userChrome.css"
+    else
+        echo "Firefox: dark CSS not yet generated (set a wallpaper first)"
     fi
 fi
 

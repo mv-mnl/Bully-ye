@@ -2,5 +2,10 @@
 reload_apps = true
 set_wallpaper = true
 
-[templates]
-# Aquí irán tus plantillas para Waybar y Kitty después
+[templates.firefox-dark]
+input_path = "~/Bully-ye/matugen/templates/firefox-dark.css"
+output_path = "/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome/userChrome-dark.css"
+
+[templates.firefox-light]
+input_path = "~/Bully-ye/matugen/templates/firefox-light.css"
+output_path = "/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome/userChrome-light.css"

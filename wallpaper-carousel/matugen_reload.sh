@@ -25,3 +25,12 @@ if systemctl --user is-active --quiet swayosd.service; then
 fi
 
 wait
+
+# Firefox: sync userChrome.css from whichever mode is currently active
+FIREFOX_CHROME="/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome"
+DARKMODE_STATE=$(cat /tmp/waybar-darkmode 2>/dev/null || echo "dark")
+if [ "$DARKMODE_STATE" = "dark" ] && [ -f "$FIREFOX_CHROME/userChrome-dark.css" ]; then
+    cp "$FIREFOX_CHROME/userChrome-dark.css" "$FIREFOX_CHROME/userChrome.css"
+elif [ "$DARKMODE_STATE" = "light" ] && [ -f "$FIREFOX_CHROME/userChrome-light.css" ]; then
+    cp "$FIREFOX_CHROME/userChrome-light.css" "$FIREFOX_CHROME/userChrome.css"
+fi
