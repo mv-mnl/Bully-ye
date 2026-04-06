@@ -1,0 +1,46 @@
+[CompactMode]
+IconSize=22
+PreviewSize=22
+PreviewsShown=true
+
+[DetailsMode]
+IconSize=22
+PreviewColumn=true
+PreviewSize=22
+PreviewsShown=true
+
+[General]
+HomeUrl=file:///home/manuelmv
+LockPanels=false
+RememberOpenedTabs=true
+ShowFullPathInTitlebar=true
+ShowHiddenFiles=false
+ShowStatusBar=true
+SplitView=false
+Version=202
+ViewPropsTimestamp=2026,4,5,18,51,45.99
+
+[IconsMode]
+IconSize=80
+PreviewSize=80
+PreviewsShown=true
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+StatusBar=Enabled
+ToolBar=Enabled
+
+[PlacesPanel]
+IconSize=22
+
+[PreviewSettings]
+MaximumLocalSize=0
+MaximumRemoteSize=0
+Plugins=appimagethumbnail,audiopreview,directorythumbnail,exrthumbnail,ffmpegthumbs,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,svgthumbnail,windowsexethumbnail
+
+[UiSettings]
+ColorScheme=CatppuccinMocha

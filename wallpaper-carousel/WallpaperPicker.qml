@@ -445,6 +445,25 @@ Item {
         interval: 150 
     }
 
+    // Safety timeout: reset download state if it hangs for over 90s (e.g. silent curl failure)
+    Timer {
+        id: downloadTimeout
+        interval: 90000
+        repeat: false
+        onTriggered: {
+            window.isDownloadingWallpaper = false;
+            window.currentDownloadName = "";
+        }
+    }
+
+    onIsDownloadingWallpaperChanged: {
+        if (window.isDownloadingWallpaper) {
+            downloadTimeout.restart();
+        } else {
+            downloadTimeout.stop();
+        }
+    }
+
     // -------------------------------------------------------------------------
     // COLOR FILTERING MATH & NATIVE FILE SYSTEM CACHE
     // -------------------------------------------------------------------------
@@ -769,7 +788,16 @@ Item {
         } 
     }
     
-    Shortcut { sequence: "Escape"; onActivated: { if (window.currentFilter === "Search") { window.currentFilter = "All"; } } }
+    Shortcut { 
+        sequence: "Escape"
+        onActivated: { 
+            if (window.currentFilter === "Search") { 
+                window.currentFilter = "All"; 
+            } else {
+                Quickshell.execDetached(["bash", "-c", "pkill -f quickshell"])
+            }
+        } 
+    }
     Shortcut { sequence: "Tab"; onActivated: window.cycleFilter(1) }
     Shortcut { sequence: "Backtab"; onActivated: window.cycleFilter(-1) }
 

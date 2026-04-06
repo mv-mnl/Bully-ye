@@ -21,6 +21,7 @@
         "custom/button",
         "custom/waypaper",
         "network",
+        "custom/darkmode",
         "custom/notification-daemon"
     ],
 
@@ -130,5 +131,19 @@
         "tooltip": true,
         "tooltip-format": "Cambiar Fondo (Waypaper)",
         "on-click": "~/Bully-ye/wallpaper-carousel/run-carousel.sh"
+    },
+    "custom/darkmode": {
+        "format": "{icon}",
+        "return-type": "json",
+        "exec": "/home/manuelmv/Bully-ye/waybar/darkmode-status.sh",
+        "interval": "once",
+        "signal": 8,
+        "format-icons": {
+            "dark": "󰖃",
+            "light": "󰖔"
+        },
+        "tooltip": true,
+        "tooltip-format": "Cambiar modo día/noche",
+        "on-click": "/home/manuelmv/Bully-ye/waybar/darkmode-toggle.sh"
     }
 }

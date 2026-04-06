@@ -73,3 +73,13 @@ window#waybar {
 #custom-button:hover {
     color: #f5c2e7;
 }
+
+#custom-darkmode {
+    color: #f9e2af;
+    padding: 0 15px;
+    margin: 4px 0;
+}
+
+#custom-darkmode:hover {
+    color: #fab387;
+}
