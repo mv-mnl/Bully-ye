@@ -3,6 +3,7 @@ DIR="$HOME/Bully-ye/wallpaper-carousel"
 
 # Create cache dirs if not existing
 mkdir -p "$HOME/.cache/wallpaper_picker/thumbs"
+mkdir -p "$HOME/Pictures"
 
 # Clean up any previously hung quickshell instances related to the carousel to avoid overlaps
 for pid in $(pgrep -f "quickshell.*shell.qml"); do

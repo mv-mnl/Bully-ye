@@ -97,7 +97,8 @@ Item {
                     (
                         cp "$DEST_FILE" /tmp/lock_bg.png
                         pkill mpvpaper || true
-                        swww img "$DEST_FILE" --transition-type ${randomTransition} --transition-pos 0.5,0.5 --transition-fps 144 --transition-duration 1 &
+                        waypaper --wallpaper "$DEST_FILE" &
+                        echo "$DEST_FILE" > /tmp/current-wallpaper
                         matugen image "$FINAL_THUMB" && bash "$RELOAD_SCRIPT"
                         wait
                     ) >/dev/null 2>&1 & disown
@@ -132,7 +133,8 @@ Item {
                             cp "$DEST_FILE" /tmp/lock_bg.png
                             
                             pkill mpvpaper || true
-                            swww img "$DEST_FILE" --transition-type ${randomTransition} --transition-pos 0.5,0.5 --transition-fps 144 --transition-duration 1 &
+                            waypaper --wallpaper "$DEST_FILE" &
+                            echo "$DEST_FILE" > /tmp/current-wallpaper
                             matugen image "$FINAL_THUMB" && bash "$RELOAD_SCRIPT"
                             wait
                         fi
@@ -158,17 +160,21 @@ Item {
             lockBgCmd = `cp "$THUMB_FILE" /tmp/lock_bg.png`
         } else {
             const randomTransition = window.transitions[Math.floor(Math.random() * window.transitions.length)]
-            wallpaperCmd = `swww img "$WALL_FILE" --transition-type ${randomTransition} --transition-pos 0.5,0.5 --transition-fps 144 --transition-duration 1`
+            wallpaperCmd = `waypaper --wallpaper "$WALL_FILE"`
             lockBgCmd = `cp "$WALL_FILE" /tmp/lock_bg.png`
         }
 
         const fullScript = `
             export WALL_FILE="${escOriginal}"
             export THUMB_FILE="${escThumb}"
+            export RELOAD_SCRIPT="${escReload}"
             
             (
+                ${lockBgCmd}
                 pkill mpvpaper || true
-                waypaper --wallpaper "$WALL_FILE" &
+                ${wallpaperCmd} &
+                echo "$WALL_FILE" > /tmp/current-wallpaper
+                matugen image "$THUMB_FILE" && bash "$RELOAD_SCRIPT"
                 wait
             ) >/dev/null 2>&1 & disown
         `
