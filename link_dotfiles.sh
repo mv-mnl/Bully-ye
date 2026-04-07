@@ -58,6 +58,10 @@ else
     create_symlink "$DOTFILES_DIR/zsh" "$CONFIG_DIR/zsh"
 fi
 
+echo -e "\n${BLUE}--- Archivos de KDE / Dolphin ---${NC}"
+create_symlink "$DOTFILES_DIR/dolphin/kdeglobals" "$CONFIG_DIR/kdeglobals"
+create_symlink "$DOTFILES_DIR/dolphin/dolphinrc" "$CONFIG_DIR/dolphinrc"
+
 echo -e "\n${YELLOW}--- SDDM y Plymouth ---${NC}"
 echo -e "Estos requieren privilegios de administrador (sudo) para instalarse en el sistema."
 echo -e "Si deseas instalarlos, puedes correr manualmente:"
