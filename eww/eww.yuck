@@ -26,11 +26,11 @@
         (label :class "media-title"
                :text {media?.title ?: "No media playing"}
                :halign "start"
-               :truncate true)
+               :limit-width 22)
         (label :class "media-artist"
                :text {media?.artist ?: "Unknown artist"}
                :halign "start"
-               :truncate true))
+               :limit-width 22))
       ; Controls
       (box :orientation "h"
            :space-evenly false

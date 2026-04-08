@@ -7,7 +7,17 @@ fi
 
 TITLE=$(playerctl metadata title 2>/dev/null)
 ARTIST=$(playerctl metadata artist 2>/dev/null)
-ART_URL=$(playerctl metadata mpris:artUrl 2>/dev/null | sed 's|^file://||')
+RAW_ART=$(playerctl metadata mpris:artUrl 2>/dev/null)
+
+# If it's a local file, strip the file:// prefix; otherwise download it
+if [[ "$RAW_ART" == file://* ]]; then
+    ART_PATH="${RAW_ART#file://}"
+elif [[ "$RAW_ART" == http* ]]; then
+    ART_PATH="/tmp/eww-media-art.jpg"
+    curl -sL --max-time 3 "$RAW_ART" -o "$ART_PATH" 2>/dev/null || ART_PATH=""
+else
+    ART_PATH=""
+fi
 
 POS=$(playerctl position 2>/dev/null | awk '{print int($1)}')
 LEN_US=$(playerctl metadata mpris:length 2>/dev/null)
@@ -18,7 +28,6 @@ if [ -z "$LEN_US" ] || [ "$LEN_US" -eq 0 ]; then
     PROGRESS=0
 else
     LEN=$((LEN_US / 1000000))
-    # Handle potentially bad math with awk (some awk locales need dot formatting but mostly okay)
     PROGRESS=$(awk -v pos="$POS" -v len="$LEN" 'BEGIN { printf "%.2f", (pos / len) * 100 }')
 fi
 
@@ -34,7 +43,7 @@ LEN_STR=$(format_time "$LEN")
 jq -n \
   --arg title "$TITLE" \
   --arg artist "$ARTIST" \
-  --arg artUrl "$ART_URL" \
+  --arg artUrl "${ART_PATH:-}" \
   --arg status "$STATUS" \
   --argjson position "$POS" \
   --argjson length "$LEN" \
