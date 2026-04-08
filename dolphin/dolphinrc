@@ -43,4 +43,4 @@ MaximumRemoteSize=0
 Plugins=appimagethumbnail,audiopreview,directorythumbnail,exrthumbnail,ffmpegthumbs,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,svgthumbnail,windowsexethumbnail
 
 [UiSettings]
-ColorScheme=CatppuccinMocha
+ColorScheme=
