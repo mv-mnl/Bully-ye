@@ -49,3 +49,95 @@ $hover: #fab387;
   font-size: 14px;
   margin-top: 8px;
 }
+
+// ─── Media Widget ────────────────────────────────────────────────────────────
+$media-bg:      rgba(24, 24, 37, 0.97);
+$media-surface: rgba(255, 255, 255, 0.08);
+$primary:       #f38ba8;  // pink accent (Catppuccin Mocha red/pink)
+$on-surface:    #cdd6f4;
+$on-muted:      rgba(205, 214, 244, 0.5);
+
+.media-popup {
+  background-color: $media-bg;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.media-art-box {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: $media-surface;
+}
+
+.media-art {
+  border-radius: 12px;
+}
+
+.media-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: $on-surface;
+}
+
+.media-artist {
+  font-size: 13px;
+  color: $on-muted;
+  font-weight: 400;
+}
+
+.media-btn-main {
+  background-color: $primary;
+  color: #1e1e2e;
+  border-radius: 50%;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 18px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: lighten($primary, 8%);
+  }
+}
+
+.media-btn-small {
+  background-color: transparent;
+  color: $on-surface;
+  border-radius: 50%;
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $media-surface;
+  }
+}
+
+.media-progress scale trough {
+  background-color: $media-surface;
+  border-radius: 4px;
+  min-height: 4px;
+}
+
+.media-progress scale trough highlight {
+  background-color: $primary;
+  border-radius: 4px;
+}
+
+.media-progress scale trough slider {
+  background-color: $primary;
+  min-width: 12px;
+  min-height: 12px;
+  border-radius: 50%;
+  margin-top: -4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.media-time {
+  font-size: 11px;
+  color: $on-muted;
+  font-weight: 400;
+}

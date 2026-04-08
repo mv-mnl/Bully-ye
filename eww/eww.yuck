@@ -1,5 +1,77 @@
 (defpoll current_volume :interval "100ms" "scripts/volume-manager.sh get")
 
+; ─── Media ───────────────────────────────────────────────────────────────────
+(defpoll media :interval "1s" "scripts/media-info.sh")
+
+(defwidget media_player []
+  (box :class "media-popup"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    ; Top row: art + info + buttons
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 14
+      ; Album art
+      (box :class "media-art-box"
+        (image :class "media-art"
+               :path {media?.artUrl != "" ? media?.artUrl : ""}
+               :image-width 72
+               :image-height 72))
+      ; Title & Artist
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 4
+           :hexpand true
+        (label :class "media-title"
+               :text {media?.title ?: "No media playing"}
+               :halign "start"
+               :truncate true)
+        (label :class "media-artist"
+               :text {media?.artist ?: "Unknown artist"}
+               :halign "start"
+               :truncate true))
+      ; Controls
+      (box :orientation "h"
+           :space-evenly false
+           :spacing 6
+           :valign "center"
+        (button :class "media-btn-small"
+                :onclick "playerctl previous"
+                "⏮")
+        (button :class "media-btn-main"
+                :onclick "playerctl play-pause"
+                {media?.status == "Playing" ? "⏸" : "▶"})
+        (button :class "media-btn-small"
+                :onclick "playerctl next"
+                "⏭")))
+    ; Progress bar + time labels
+    (box :orientation "v"
+         :space-evenly false
+         :spacing 4
+      (scale :class "media-progress"
+             :orientation "h"
+             :hexpand true
+             :min 0
+             :max 100
+             :value {media?.progress ?: 0}
+             :onchange "playerctl position $(awk -v pct={} -v len=${media?.length} 'BEGIN{printf \"%.0f\", pct/100*len}')")
+      (box :orientation "h"
+           :space-evenly false
+        (label :class "media-time" :text {media?.posStr ?: "0:00"} :halign "start" :hexpand true)
+        (label :class "media-time" :text {media?.lenStr ?: "0:00"} :halign "end")))))
+
+(defwindow media_menu
+  :monitor 0
+  :geometry (geometry :x "10px"
+                      :y "55px"
+                      :width "400px"
+                      :height "140px"
+                      :anchor "top left")
+  :stacking "fg"
+  :exclusive false
+  (media_player))
+
 (defwidget volume-slider []
   (box :class "volume-popup" :orientation "v" :space-evenly false :spacing 10
     (label :class "volume-icon" :text "")
