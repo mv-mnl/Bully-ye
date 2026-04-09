@@ -3,11 +3,12 @@ $text: #cdd6f4;
 $accent: #f9e2af;
 $hover: #fab387;
 
-* {
+/* Global styles removed for better GTK compatibility */
+/* * {
   all: unset;
   font-family: 'Inter', 'JetBrainsMono Nerd Font', sans-serif;
   font-weight: 600;
-}
+} */
 
 .volume-popup {
   background-color: $base;
@@ -69,7 +70,7 @@ $on-muted:      rgba(205, 214, 244, 0.5);
   min-width: 72px;
   min-height: 72px;
   border-radius: 12px;
-  overflow: hidden;
+  // overflow: hidden; // Not supported by Eww GTK CSS
   background-color: $media-surface;
 }
 
@@ -140,4 +141,19 @@ $on-muted:      rgba(205, 214, 244, 0.5);
   font-size: 11px;
   color: $on-muted;
   font-weight: 400;
+}
+
+
+.system-box {
+    background-color: #f38ba8; /* Fondo oscuro semitransparente */
+    border-radius: 12px;                     /* Bordes redondeados */
+    padding: 15px;                           /* Espacio interno */
+    border: 2px solid rgba(255, 255, 255, 0.1); /* Un borde sutil */
+}
+
+.metric-label {
+    color: #cdd6f4;                          /* Color del texto */
+    font-family: "JetBrains Mono", monospace; /* Fuente de terminal */
+    font-size: 14px;
+    font-weight: bold;
 }

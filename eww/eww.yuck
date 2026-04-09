@@ -1,7 +1,7 @@
 (defpoll current_volume :interval "100ms" "scripts/volume-manager.sh get")
 
 ; ─── Media ───────────────────────────────────────────────────────────────────
-(defpoll media :interval "1s" "scripts/media-info.sh")
+(defpoll media :interval "1s" "scripts/media-info.sh || echo '{}'")
 
 (defwidget media_player []
   (box :class "media-popup"
@@ -93,3 +93,37 @@
   :stacking "fg"
   :exclusive false
   (volume-slider))
+
+;; --- MÉTRICAS DEL SISTEMA ---
+
+;; Lee la RAM usando el comando 'free' y calcula el porcentaje
+(defpoll ram_usage :interval "2s" "free -m | awk '/Mem/ {printf \"%.0f\\n\", $3/$2 * 100}'")
+
+;; Lee el uso del procesador calculando la inactividad del sistema (id)
+(defpoll cpu_usage :interval "2s" "vmstat 1 2 | tail -1 | awk '{print 100-$15}'")
+
+;; Lee el uso de la tarjeta gráfica. Para tu RTX 5070, la forma más eficiente 
+;; y directa de obtener este dato en Arch es a través de los drivers de NVIDIA:
+(defpoll gpu_usage :interval "2s" "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits")
+;; --- VENTANA DEL WIDGET ---
+
+(defwindow ram_widget
+    :monitor 0                  ; 0 es tu monitor principal
+    :geometry (geometry :x "20px"
+                        :y "20px"
+                        :width "200px"
+                        :height "100px" ; Aumenté un poco la altura para que quepan las 3 líneas
+                        :anchor "bottom left") ; Anclado abajo a la izquierda
+    :stacking "bg"              ; Lo envía a la capa del fondo de pantalla
+    :exclusive false            ; Permite que otras ventanas se pongan encima
+    
+    ;; El contenedor principal
+    (box :class "system-box" 
+         :orientation "v"       ; "v" alinea los elementos verticalmente (uno debajo del otro)
+         :space-evenly false    ; Evita que los textos se separen demasiado
+         :spacing 10            ; Deja 10 píxeles de espacio entre cada línea
+         
+         ;; Los textos
+         (label :text "RAM: ${ram_usage}%" :class "metric-label" :halign "start")
+         (label :text "CPU: ${cpu_usage}%" :class "metric-label" :halign "start")
+         (label :text "GPU: ${gpu_usage}%" :class "metric-label" :halign "start")))

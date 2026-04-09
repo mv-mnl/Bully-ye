@@ -21,7 +21,6 @@
         "custom/button",
         "custom/waypaper",
         "network",
-        "custom/darkmode",
         "custom/notification-daemon"
     ],
 
