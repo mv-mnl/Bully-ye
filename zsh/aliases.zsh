@@ -58,3 +58,8 @@ if command -v eza &> /dev/null; then
     alias tree='eza --tree --level=2 --icons=always'
     alias treel='eza --tree --level=3 --icons=always'
 fi
+
+
+#Python
+
+
