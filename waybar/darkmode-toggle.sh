@@ -40,16 +40,17 @@ if [ "$CURRENT" = "dark" ]; then
         --signal org.freedesktop.portal.Settings.SettingChanged \
         "org.freedesktop.appearance" "color-scheme" "<uint32 2>" 2>/dev/null || true
 
-    # KDE/Qt Theme sync if kdeglobals exists
-    if [ -f ~/.config/kdeglobals ]; then
-        sed -i 's/ColorScheme=.*/ColorScheme=BreezeLight/' ~/.config/kdeglobals
+    # KDE/Qt Theme sync: apply Matugen generated kdeglobals
+    if [ -f ~/.config/kdeglobals-light ]; then
+        cp ~/.config/kdeglobals-light ~/.config/kdeglobals
+        echo "KDE: applied light theme to ~/.config/kdeglobals"
     fi
 
     # Matugen: regenerate with light scheme
     WALLPAPER=$(cat /tmp/current-wallpaper 2>/dev/null)
     if [ -n "$WALLPAPER" ] && command -v matugen &>/dev/null; then
         echo "Regenerating Matugen (light)"
-        matugen image "$WALLPAPER" --type scheme-tonal-spot -m light &>/dev/null
+        matugen image "$WALLPAPER" --type scheme-tonal-spot -m light --source-color-index 0 &>/dev/null
         bash /home/manuelmv/Bully-ye/wallpaper-carousel/matugen_reload.sh &
     fi
 
@@ -79,16 +80,17 @@ else
         --signal org.freedesktop.portal.Settings.SettingChanged \
         "org.freedesktop.appearance" "color-scheme" "<uint32 1>" 2>/dev/null || true
 
-    # KDE/Qt Theme sync if kdeglobals exists
-    if [ -f ~/.config/kdeglobals ]; then
-        sed -i 's/ColorScheme=.*/ColorScheme=BreezeDark/' ~/.config/kdeglobals
+    # KDE/Qt Theme sync: apply Matugen generated kdeglobals
+    if [ -f ~/.config/kdeglobals-dark ]; then
+        cp ~/.config/kdeglobals-dark ~/.config/kdeglobals
+        echo "KDE: applied dark theme to ~/.config/kdeglobals"
     fi
 
     # Matugen: regenerate with dark scheme
     WALLPAPER=$(cat /tmp/current-wallpaper 2>/dev/null)
     if [ -n "$WALLPAPER" ] && command -v matugen &>/dev/null; then
         echo "Regenerating Matugen (dark)"
-        matugen image "$WALLPAPER" --type scheme-tonal-spot -m dark &>/dev/null
+        matugen image "$WALLPAPER" --type scheme-tonal-spot -m dark --source-color-index 0 &>/dev/null
         bash /home/manuelmv/Bully-ye/wallpaper-carousel/matugen_reload.sh &
     fi
 

@@ -27,6 +27,7 @@ nvim/
 * **Limpiar el resaltado de búsqueda**: `<Esc>`
 
 **Navegación entre ventanas divididas (splits):**
+
 * **Izquierda**: `<Ctrl> + h`
 * **Abajo**: `<Ctrl> + j`
 * **Arriba**: `<Ctrl> + k`
@@ -37,6 +38,7 @@ nvim/
 El entorno usa [lazy.nvim](https://github.com/folke/lazy.nvim) como administrador. De manera automática evalúa cualquier archivo dentro de `lua/plugins/`. Si introduces un plugin nuevo en esa carpeta, lo descargará o actualizará automáticamente cuando abras Neovim.
 
 **Comandos útiles de lazy:**
+
 * Para abrir la interfaz gráfica de lazy: `:Lazy`
 * Presiona `U` dentro del menú para actualizar los plugins.
 * Presiona `X` dentro del menú para limpiar/eliminar plugins que hayas borrado de tu código.
@@ -45,11 +47,11 @@ El entorno usa [lazy.nvim](https://github.com/folke/lazy.nvim) como administrado
 ## ➕ ¿Cómo añadir un plugin nuevo?
 
 Es un proceso muy ordenado:
+
 1. Crea un nuevo archivo `.lua` en `lua/plugins/` (por ejemplo, `telescope.lua`).
 2. Retorna una tabla con la configuración del repositorio y opciones (como se ve en `lua/plugins/ui.lua`).
 3. Guarda el archivo, abre Neovim y deja que `lazy.nvim` haga el resto.
 
-Ejemplo genérico para tu archivo `lua/plugins/mi_plugin.lua`:
 ```lua
 return {
   {
@@ -62,6 +64,29 @@ return {
   }
 }
 ```
+
+## 📝 Obsidian y Markdown
+
+Se ha añadido soporte completo para notas en Markdown y sincronización con **Obsidian**.
+
+### Plugins Instalados
+
+* **Obsidian.nvim**: Integración con bóvedas de Obsidian.
+* **Render-markdown.nvim**: Embellece el Markdown dentro de Neovim (iconos, tablas, etc.).
+* **Markdown-preview.nvim**: Previsualización en el navegador.
+* **Treesitter**: Resaltado de sintaxis avanzado.
+
+### Atajos de Teclado (dentro de archivos .md)
+
+* `gf`: Seguir un enlace (link) o crear la nota si no existe.
+* `<Leader> + ch`: Alternar casilla de verificación (checkbox).
+* `<Leader> + os`: Buscar notas en la bóveda (Telescope).
+* `<Leader> + od`: Abrir la nota diaria de hoy.
+* `:MarkdownPreview`: Abrir previsualización en el navegador.
+* `:MarkdownPreviewStop`: Detener previsualización.
+
+> [!TIP]
+> Por defecto, la bóveda está configurada en `~/Documentos/vault`. Puedes cambiar esto en `lua/plugins/obsidian.lua`.
 
 ---
 *Entorno minimalista hecho a la medida.*

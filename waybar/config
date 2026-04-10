@@ -21,7 +21,6 @@
         "custom/button",
         "custom/waypaper",
         "network",
-        "custom/darkmode",
         "custom/notification-daemon"
     ],
 
@@ -101,14 +100,14 @@
         "exec": "if [ -f /tmp/waybar-cover.jpeg ]; then echo /tmp/waybar-cover.jpeg; else echo ''; fi",
         "size": 32,
         "interval": 2,
-        "on-click": "playerctl play-pause"
+        "on-click": "eww open media_menu --toggle"
     },
     "custom/spotify": {
         "format": "{}",
         "exec": "/home/manuelmv/Bully-ye/waybar/scrips.sh",
         "return-type": "json",
         "interval": 1,
-        "on-click": "playerctl play-pause",
+        "on-click": "eww open media_menu --toggle",
         "tooltip": false
     },
     "custom/volume": {

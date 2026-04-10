@@ -9,3 +9,11 @@ output_path = "/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome/u
 [templates.firefox-light]
 input_path = "~/Bully-ye/matugen/templates/firefox-light.css"
 output_path = "/home/manuelmv/.mozilla/firefox/gmi5y4ec.default-release/chrome/userChrome-light.css"
+
+[templates.kdeglobals-dark]
+input_path = "/home/manuelmv/Bully-ye/matugen/templates/kdeglobals-dark.conf"
+output_path = "/home/manuelmv/.config/kdeglobals-dark"
+
+[templates.kdeglobals-light]
+input_path = "/home/manuelmv/Bully-ye/matugen/templates/kdeglobals-light.conf"
+output_path = "/home/manuelmv/.config/kdeglobals-light"

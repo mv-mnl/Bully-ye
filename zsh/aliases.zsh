@@ -1,5 +1,6 @@
 # --- Aliases ---
 # Sistema base
+
 alias update='sudo pacman -Syu'    
 alias shutdown='shutdown now'
 alias grep='grep --color=auto'
@@ -33,6 +34,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='clear'
 alias md='mkdir -p'
+
 alias x='exit'
 
 # --- Operaciones Seguras (Piden confirmación antes de destruir o sobreescribir) ---
@@ -58,3 +60,12 @@ if command -v eza &> /dev/null; then
     alias tree='eza --tree --level=2 --icons=always'
     alias treel='eza --tree --level=3 --icons=always'
 fi
+
+
+#Python
+alias py='python3'
+alias pip='pip3'
+alias venv='python3 -m venv'
+alias venv-on='source bin/activate'
+alias venv-off='deactivate'
+

@@ -1,5 +1,77 @@
 (defpoll current_volume :interval "100ms" "scripts/volume-manager.sh get")
 
+; ─── Media ───────────────────────────────────────────────────────────────────
+(defpoll media :interval "1s" "scripts/media-info.sh || echo '{}'")
+
+(defwidget media_player []
+  (box :class "media-popup"
+       :orientation "v"
+       :space-evenly false
+       :spacing 10
+    ; Top row: art + info + buttons
+    (box :orientation "h"
+         :space-evenly false
+         :spacing 14
+      ; Album art
+      (box :class "media-art-box"
+        (image :class "media-art"
+               :path {media?.artUrl != "" ? media?.artUrl : ""}
+               :image-width 72
+               :image-height 72))
+      ; Title & Artist
+      (box :orientation "v"
+           :space-evenly false
+           :spacing 4
+           :hexpand true
+        (label :class "media-title"
+               :text {media?.title ?: "No media playing"}
+               :halign "start"
+               :limit-width 22)
+        (label :class "media-artist"
+               :text {media?.artist ?: "Unknown artist"}
+               :halign "start"
+               :limit-width 22))
+      ; Controls
+      (box :orientation "h"
+           :space-evenly false
+           :spacing 6
+           :valign "center"
+        (button :class "media-btn-small"
+                :onclick "playerctl previous"
+                "⏮")
+        (button :class "media-btn-main"
+                :onclick "playerctl play-pause"
+                {media?.status == "Playing" ? "⏸" : "▶"})
+        (button :class "media-btn-small"
+                :onclick "playerctl next"
+                "⏭")))
+    ; Progress bar + time labels
+    (box :orientation "v"
+         :space-evenly false
+         :spacing 4
+      (scale :class "media-progress"
+             :orientation "h"
+             :hexpand true
+             :min 0
+             :max 100
+             :value {media?.progress ?: 0}
+             :onchange "playerctl position $(awk -v pct={} -v len=${media?.length} 'BEGIN{printf \"%.0f\", pct/100*len}')")
+      (box :orientation "h"
+           :space-evenly false
+        (label :class "media-time" :text {media?.posStr ?: "0:00"} :halign "start" :hexpand true)
+        (label :class "media-time" :text {media?.lenStr ?: "0:00"} :halign "end")))))
+
+(defwindow media_menu
+  :monitor 0
+  :geometry (geometry :x "10px"
+                      :y "55px"
+                      :width "400px"
+                      :height "140px"
+                      :anchor "top left")
+  :stacking "fg"
+  :exclusive false
+  (media_player))
+
 (defwidget volume-slider []
   (box :class "volume-popup" :orientation "v" :space-evenly false :spacing 10
     (label :class "volume-icon" :text "")
@@ -21,3 +93,37 @@
   :stacking "fg"
   :exclusive false
   (volume-slider))
+
+;; --- MÉTRICAS DEL SISTEMA ---
+
+;; Lee la RAM usando el comando 'free' y calcula el porcentaje
+(defpoll ram_usage :interval "2s" "free -m | awk '/Mem/ {printf \"%.0f\\n\", $3/$2 * 100}'")
+
+;; Lee el uso del procesador calculando la inactividad del sistema (id)
+(defpoll cpu_usage :interval "2s" "vmstat 1 2 | tail -1 | awk '{print 100-$15}'")
+
+;; Lee el uso de la tarjeta gráfica. Para tu RTX 5070, la forma más eficiente 
+;; y directa de obtener este dato en Arch es a través de los drivers de NVIDIA:
+(defpoll gpu_usage :interval "2s" "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits")
+;; --- VENTANA DEL WIDGET ---
+
+(defwindow ram_widget
+    :monitor 0                  ; 0 es tu monitor principal
+    :geometry (geometry :x "20px"
+                        :y "20px"
+                        :width "200px"
+                        :height "100px" ; Aumenté un poco la altura para que quepan las 3 líneas
+                        :anchor "bottom left") ; Anclado abajo a la izquierda
+    :stacking "bg"              ; Lo envía a la capa del fondo de pantalla
+    :exclusive false            ; Permite que otras ventanas se pongan encima
+    
+    ;; El contenedor principal
+    (box :class "system-box" 
+         :orientation "v"       ; "v" alinea los elementos verticalmente (uno debajo del otro)
+         :space-evenly false    ; Evita que los textos se separen demasiado
+         :spacing 10            ; Deja 10 píxeles de espacio entre cada línea
+         
+         ;; Los textos
+         (label :text "RAM: ${ram_usage}%" :class "metric-label" :halign "start")
+         (label :text "CPU: ${cpu_usage}%" :class "metric-label" :halign "start")
+         (label :text "GPU: ${gpu_usage}%" :class "metric-label" :halign "start")))
