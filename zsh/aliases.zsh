@@ -34,7 +34,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='clear'
 alias md='mkdir -p'
-
+alias vault='cd ~/Documentos/manuelmv/manuelmv/'
 alias x='exit'
 
 # --- Operaciones Seguras (Piden confirmación antes de destruir o sobreescribir) ---
