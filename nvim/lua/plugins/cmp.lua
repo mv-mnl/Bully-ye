@@ -5,6 +5,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-buffer",           -- Autocompletado basado en texto del archivo
       "hrsh7th/cmp-path",             -- Autocompletado de rutas de archivos
+      "hrsh7th/cmp-nvim-lsp",          -- Autocompletado desde LSP
       "L3MON4D3/LuaSnip",             -- Motor de snippets (necesario)
       "saadparwaiz1/cmp_luasnip",     -- Conexión entre cmp y luasnip
       "rafamadriz/friendly-snippets", -- Colección de snippets para muchos lenguajes
@@ -33,6 +34,7 @@ return {
         }),
         -- Fuentes de donde sacará las sugerencias
         sources = cmp.config.sources({
+          { name = "nvim_lsp" }, -- Sugerencias del Servidor de Lenguaje (LSP)
           { name = "nvim_lua" }, -- Sugerencias de la API de Neovim
           { name = "luasnip" },  -- Snippets
           { name = "buffer" },   -- Palabras que ya escribiste en el archivo
