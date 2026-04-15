@@ -69,3 +69,4 @@ alias venv='python3 -m venv'
 alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
