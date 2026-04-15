@@ -5,3 +5,4 @@ bindkey -e                         # Emacs keybindings
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
+
