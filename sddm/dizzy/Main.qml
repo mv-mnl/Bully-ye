@@ -17,17 +17,7 @@ Rectangle {
 
     SDDM.TextConstants { id: textConstants }
 
-    // Background
-    SDDM.Background {
-        anchors.fill: parent
-        source: config.background ? Qt.resolvedUrl(config.background) : ""
-        fillMode: Image.PreserveAspectCrop
-        onStatusChanged: {
-            if (status === Image.Error && source !== config.defaultBackground) {
-                source = config.defaultBackground
-            }
-        }
-    }
+    // Background removido para usar color black
 
     // Main Layout
     Item {

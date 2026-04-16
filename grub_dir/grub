@@ -1,54 +1,38 @@
 # =========================================================
-#   GRUB Boot Loader Configuration - CIBERPUNK EDITION
+#   GRUB Boot Loader Configuration - MINIMALISTA
 # =========================================================
 
-# --- Configuración por Defecto ---
-# 'saved' recordará tu última elección, útil si alternas mucho.
+# --- Opciones por Defecto ---
 GRUB_DEFAULT=saved
 GRUB_SAVEDEFAULT=true
 
-# --- El 'Timeout' ---
-# 5 segundos para que la intro cyberpunk no canse.
-GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="Arch-Netrunner"
-
-# --- Estilo del Menú ---
-# 'menu' es lo mejor para un fondo personalizado.
+# --- Tiempo de espera ---
+# Espera corta de 3 segundos
+GRUB_TIMEOUT=3
 GRUB_TIMEOUT_STYLE=menu
+GRUB_DISTRIBUTOR="Arch"
 
-# --- Comando de Kernel (Menos verboso, más limpio) ---
-# He añadido 'splash' y quitado loglevel para una carga limpia.
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash udev.log_level=3"
+# --- Comando de Kernel (Limpio y silencioso) ---
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 vt.global_cursor_default=0"
 GRUB_CMDLINE_LINUX=""
 
-# --- Módulos y Encriptación (Mantén los tuyos) ---
+# --- Módulos ---
 GRUB_PRELOAD_MODULES="part_gpt part_msdos btrfs"
 #GRUB_ENABLE_CRYPTODISK=y
 
-# --- Estilo Gráfico (¡AQUÍ ESTÁ LA MAGIA!) ---
-
-# 1. Resolución: Cámbiala si tienes una pantalla 2K o 4K.
-GRUB_GFXMODE=1920x1080
-
-# 2. Mantener la resolución al arrancar el kernel.
+# --- Estilo Gráfico Minimalista ---
+GRUB_GFXMODE=auto
 GRUB_GFXPAYLOAD_LINUX=keep
 
-# 3. La Imagen de Fondo (La que guardaste en Paso 1).
-# Descomenta la siguiente línea y pon LA RUTA EXACTA a tu imagen.
-# GRUB_BACKGROUND="/boot/grub/mi_fondo_cyberpunk.jpg"
+# Colores básicos (monocromático)
+GRUB_COLOR_NORMAL="light-gray/black"
+GRUB_COLOR_HIGHLIGHT="black/light-gray"
 
-# 4. Los Colores (Si NO usas una imagen de fondo o tema).
-# Formato: "foreground/background".
-# Esto da letras cian neón con fondo oscuro y selección magenta.
-GRUB_COLOR_NORMAL="light-cyan/black"
-GRUB_COLOR_HIGHLIGHT="magenta/black"
-
-# 5. EL TEMA COMPLETO (Súper recomendado, ver Paso 3).
-# Si instalas un tema, descomenta esta línea y pon la ruta al archivo 'theme.txt'.
-# GRUB_THEME="/boot/grub/themes/Vimix-Cyberpunk/theme.txt"
+# Desactivamos fondos de imagen o temas completos
+#GRUB_BACKGROUND=""
+#GRUB_THEME=""
 
 # --- Opciones Avanzadas ---
 GRUB_DISABLE_RECOVERY=true
 #GRUB_DISABLE_SUBMENU=y
-
 GRUB_DISABLE_OS_PROBER=false
