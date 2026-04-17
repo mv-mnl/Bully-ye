@@ -39,19 +39,19 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
       -- Capacidades para que nvim-cmp funcione con LSP
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
       -- Configuración de pylsp (Python)
-      lspconfig.pylsp.setup({
+      vim.lsp.config("pylsp", {
         capabilities = capabilities,
       })
+      vim.lsp.enable("pylsp")
 
       -- Configuración de lua_ls (Lua)
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -61,6 +61,7 @@ return {
           },
         },
       })
+      vim.lsp.enable("lua_ls")
     end,
   },
 }
