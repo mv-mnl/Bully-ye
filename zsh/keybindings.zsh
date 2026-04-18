@@ -18,11 +18,13 @@ bindkey '^[[3~' delete-char-selection
 
 # --- Selección de texto con Shift ---
 function select-home() {
-  (( REGION_ACTIVE )) || zle set-mark-command
   zle beginning-of-line
+  zle set-mark-command
+  zle end-of-line
 }
 function select-end() {
-  (( REGION_ACTIVE )) || zle set-mark-command
+  zle beginning-of-line
+  zle set-mark-command
   zle end-of-line
 }
 function select-left() {
