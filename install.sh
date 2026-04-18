@@ -52,7 +52,6 @@ PACKAGES=(
     "hyprpaper"
     "waypaper"
     "quickshell-git"
-    "qt6-declarative"
     "imagemagick"
     "ttf-jetbrains-mono-nerd"
     "ttf-font-awesome"
@@ -60,6 +59,15 @@ PACKAGES=(
     "ttf-roboto"
     "plymouth"
     "sddm"
+    "qt6-declarative"
+    "qt6-5compat"
+    "qt6-svg"
+    "qt6-multimedia"
+    "qt6-multimedia-ffmpeg"
+    "gst-plugins-base"
+    "gst-plugins-good"
+    "gst-plugins-bad"
+    "gst-plugins-ugly"
 )
 
 echo -e "${BLUE}Paquetes a instalar:${NC} ${PACKAGES[*]}"
