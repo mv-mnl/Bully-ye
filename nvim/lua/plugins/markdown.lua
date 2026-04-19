@@ -28,7 +28,7 @@ return {
 
       configs.setup({
         -- Asegúrate de incluir estos para que Obsidian y Render-Markdown funcionen
-        ensure_installed = { "markdown", "markdown_inline", "lua", "vim", "bash" },
+        ensure_installed = { "markdown", "markdown_inline", "lua", "vim", "bash", "c", "cpp" },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,

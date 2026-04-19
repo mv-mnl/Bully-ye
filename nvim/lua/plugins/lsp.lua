@@ -25,6 +25,7 @@ return {
         ensure_installed = {
           "pylsp",  -- LSP para Python (no requiere npm)
           "lua_ls", -- LSP para Lua (opcional pero recomendado)
+          "clangd", -- LSP para C/C++
         },
       })
     end,
@@ -62,6 +63,21 @@ return {
         },
       })
       vim.lsp.enable("lua_ls")
+
+      -- Configuración de clangd (C/C++)
+      vim.lsp.config("clangd", {
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--fallback-style=llvm",
+        },
+      })
+      vim.lsp.enable("clangd")
     end,
   },
 }
