@@ -21,6 +21,7 @@
         "custom/button",
         "custom/waypaper",
         "network",
+        "bluetooth",
         "custom/notification-daemon"
     ],
 
@@ -90,11 +91,22 @@
     },
     "network": {
         "format-wifi": "   {essid}",
-        "format-ethernet": "󰈀   {ipaddr}",
+        "format-ethernet": "󰈀   {ifname}",
         "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) 󰈀",
-        "format-disconnected": "⚠  Disconnected",
-        "on-click": "networkmanager_dmenu"
+        "format-disconnected": "⚠  Desconectado",
+        "on-click": "nm-connection-editor",
+        "on-click-right": "networkmanager_dmenu"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} conectados",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} conectados\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "rofi-bluetooth",
+        "on-click-right": "blueman-manager"
     },
     "image#album-art": {
         "exec": "if [ -f /tmp/waybar-cover.jpeg ]; then echo /tmp/waybar-cover.jpeg; else echo ''; fi",
