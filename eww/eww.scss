@@ -157,3 +157,127 @@ $on-muted:      rgba(205, 214, 244, 0.5);
     font-size: 14px;
     font-weight: bold;
 }
+
+// ─── Network & Bluetooth Widgets ─────────────────────────────────────────────
+.status-popup {
+  background-color: $media-bg;
+  border-radius: 20px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-btn {
+  background-color: $media-surface;
+  color: $on-surface;
+  border-radius: 50%;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 22px;
+  border: none;
+  background-image: none;
+  box-shadow: none;
+  font-family: inherit;
+  
+  &:hover {
+    background-color: lighten($media-surface, 10%);
+  }
+}
+
+.status-btn.connected, .status-btn.enabled {
+  background-color: $primary;
+  color: #1e1e2e;
+  &:hover {
+    background-color: lighten($primary, 8%);
+  }
+}
+
+.status-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: $on-surface;
+  margin-left: 8px;
+}
+
+// ─── Network list styles ──────────────────────────────────────────────────────
+.net-popup {
+  min-width: 260px;
+}
+
+.divider {
+  background-color: rgba(255, 255, 255, 0.07);
+  min-height: 1px;
+  margin: 2px 0;
+}
+
+.net-entry {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 6px 10px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+  }
+
+  &.connected {
+    background-color: rgba(243, 139, 168, 0.12);
+    border: 1px solid rgba(243, 139, 168, 0.3);
+  }
+}
+
+.net-icon {
+  font-size: 18px;
+  color: $accent;
+  min-width: 24px;
+}
+
+.net-name {
+  font-size: 13px;
+  color: $on-surface;
+  font-weight: 600;
+}
+
+.net-btn {
+  border-radius: 50%;
+  min-width: 28px;
+  min-height: 28px;
+  font-size: 14px;
+  border: none;
+  background-image: none;
+  box-shadow: none;
+  font-family: inherit;
+
+  &.connect-btn {
+    background-color: $primary;
+    color: #1e1e2e;
+    &:hover { background-color: lighten($primary, 8%); }
+  }
+
+  &.disconnect-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $on-surface;
+    &:hover { background-color: rgba(255, 80, 80, 0.5); }
+  }
+}
+
+.scan-btn {
+  background-color: $media-surface;
+  color: $on-surface;
+  border-radius: 50%;
+  min-width: 32px;
+  min-height: 32px;
+  font-size: 16px;
+  border: none;
+  background-image: none;
+  box-shadow: none;
+  font-family: inherit;
+
+  &:hover {
+    background-color: lighten($media-surface, 10%);
+    color: $accent;
+  }
+}
+
+window {
+  background-color: transparent;
+}

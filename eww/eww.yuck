@@ -127,3 +127,91 @@
          (label :text "RAM: ${ram_usage}%" :class "metric-label" :halign "start")
          (label :text "CPU: ${cpu_usage}%" :class "metric-label" :halign "start")
          (label :text "GPU: ${gpu_usage}%" :class "metric-label" :halign "start")))
+
+;; ─── Network & Bluetooth ────────────────────────────────────────────────────
+(defpoll wifi_data :interval "3s" "scripts/wifi-manager.sh status")
+(defpoll bt_data   :interval "3s" "scripts/bt-manager.sh status")
+(defpoll wifi_list :interval "10s" "scripts/wifi-manager.sh scan 2>/dev/null || echo '[]'")
+(defpoll bt_list   :interval "15s" "scripts/bt-manager.sh scan 2>/dev/null || echo '[]'")
+
+;; ─── WiFi single network entry ───────────────────────────────────────────────
+(defwidget wifi-network-entry [net]
+  (box :class "net-entry ${net.connected ? 'connected' : ''}"
+       :orientation "h" :space-evenly false :spacing 8 :valign "center"
+    (label :class "net-icon" :text "${net.icon}${net.secured}")
+    (label :class "net-name" :text "${net.ssid}" :hexpand true :halign "start" :limit-width 18)
+    (button :class "net-btn ${net.connected ? 'disconnect-btn' : 'connect-btn'}"
+            :onclick {net.connected ?
+              "scripts/wifi-manager.sh disconnect &" :
+              "scripts/wifi-manager.sh connect '${net.ssid}' &"}
+            {net.connected ? "✕" : ""})))
+
+;; ─── WiFi popup ──────────────────────────────────────────────────────────────
+(defwidget wifi-popup []
+  (box :class "status-popup net-popup" :orientation "v" :space-evenly false :spacing 8
+    ;; Header row
+    (box :orientation "h" :space-evenly false :spacing 10 :valign "center"
+      (button :class "status-btn ${wifi_data.status}"
+              :onclick "scripts/wifi-manager.sh toggle"
+              "${wifi_data.icon}")
+      (label :class "status-label" :text "${wifi_data.ssid}" :limit-width 18 :hexpand true)
+      (button :class "scan-btn" :onclick "eww update wifi_list='$(scripts/wifi-manager.sh scan 2>/dev/null || echo [])'  &" "󰑐"))
+    ;; Divider
+    (box :class "divider")
+    ;; Network list
+    (scroll :vscroll true :hscroll false :height 200
+      (box :orientation "v" :space-evenly false :spacing 4
+        (for net in wifi_list
+          (wifi-network-entry :net net))))))
+
+(defwindow wifi_window
+  :monitor 0
+  :geometry (geometry :x "-10px"
+                      :y "55px"
+                      :width "280px"
+                      :height "300px"
+                      :anchor "top right")
+  :stacking "fg"
+  :exclusive false
+  (wifi-popup))
+
+;; ─── Bluetooth single device entry ───────────────────────────────────────────
+(defwidget bt-device-entry [dev]
+  (box :class "net-entry ${dev.connected ? 'connected' : ''}"
+       :orientation "h" :space-evenly false :spacing 8 :valign "center"
+    (label :class "net-icon" :text "${dev.connected ? '󰂱' : ''}")
+    (label :class "net-name" :text "${dev.name}" :hexpand true :halign "start" :limit-width 18)
+    (button :class "net-btn ${dev.connected ? 'disconnect-btn' : 'connect-btn'}"
+            :onclick {dev.connected ?
+              "scripts/bt-manager.sh disconnect '${dev.mac}' &" :
+              "scripts/bt-manager.sh connect '${dev.mac}' &"}
+            {dev.connected ? "✕" : ""})))
+
+;; ─── Bluetooth popup ─────────────────────────────────────────────────────────
+(defwidget bt-popup []
+  (box :class "status-popup net-popup" :orientation "v" :space-evenly false :spacing 8
+    ;; Header row
+    (box :orientation "h" :space-evenly false :spacing 10 :valign "center"
+      (button :class "status-btn ${bt_data.status}"
+              :onclick "scripts/bt-manager.sh toggle"
+              "${bt_data.icon}")
+      (label :class "status-label" :text "${bt_data.name}" :limit-width 18 :hexpand true)
+      (button :class "scan-btn" :onclick "eww update bt_list='$(scripts/bt-manager.sh scan 2>/dev/null || echo [])' &" "󰑐"))
+    ;; Divider
+    (box :class "divider")
+    ;; Device list
+    (scroll :vscroll true :hscroll false :height 200
+      (box :orientation "v" :space-evenly false :spacing 4
+        (for dev in bt_list
+          (bt-device-entry :dev dev))))))
+
+(defwindow bt_window
+  :monitor 0
+  :geometry (geometry :x "-300px"
+                      :y "55px"
+                      :width "280px"
+                      :height "300px"
+                      :anchor "top right")
+  :stacking "fg"
+  :exclusive false
+  (bt-popup))

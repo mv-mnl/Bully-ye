@@ -95,7 +95,7 @@
         "tooltip-format": "{ifname} via {gwaddr} 󰈀",
         "format-linked": "{ifname} (No IP) 󰈀",
         "format-disconnected": "⚠  Desconectado",
-        "on-click": "nm-connection-editor",
+        "on-click": "eww open wifi_window --toggle",
         "on-click-right": "networkmanager_dmenu"
     },
     "bluetooth": {
@@ -105,7 +105,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} conectados",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} conectados\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "rofi-bluetooth",
+        "on-click": "eww open bt_window --toggle",
         "on-click-right": "blueman-manager"
     },
     "image#album-art": {
