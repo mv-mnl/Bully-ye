@@ -65,6 +65,9 @@ if command -v eza &> /dev/null; then
 fi
 
 
+
+alias monitor="~/Bully-ye/hypr/scripts/detect_machine.sh"
+
 #Python
 alias py='python3'
 alias pip='pip3'
@@ -72,4 +75,3 @@ alias venv='python3 -m venv'
 alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
