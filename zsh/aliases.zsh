@@ -23,8 +23,9 @@ fi
 # Git Commands
 alias gc='git add -A && git commit -m'
 alias gp='git push origin $(git rev-parse --abbrev-ref HEAD)'
-alias gs='git status'
-alias gl='git log --oneline --decorate --graph'
+alias gs="git status -sb"
+alias gd="git diff --color-words --patch-with-stat"
+alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias gcm='git switch'
 alias gcr='git switch -c'
 

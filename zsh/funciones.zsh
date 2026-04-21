@@ -3,3 +3,12 @@ mk() {
 }
 
 
+git_resumen() {
+  echo -e "\n--- RAMAS ---"
+  git branch -a
+  echo -e "\n--- ÚLTIMOS CAMBIOS ---"
+  git log -n 5 --oneline --graph --color
+  echo -e "\n--- ESTADO ---"
+  git status -s
+}
+alias gr='git_resumen'
