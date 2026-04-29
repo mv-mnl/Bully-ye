@@ -43,7 +43,7 @@ alias x='exit'
 # --- Operaciones Seguras (Piden confirmación antes de destruir o sobreescribir) ---
 alias cp='cp -iv'
 alias mv='mv -iv'
-alias rm='rm -i'
+alias rm='rm -dfr '
 
 # --- Gestor de Paquetes (Yay/Pacman) ---
 alias install='yay -S'
@@ -75,11 +75,5 @@ alias venv='python3 -m venv'
 alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
-<<<<<<< HEAD
-=======
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-
-
-
 alias coding='antigravity . && exit'
->>>>>>> 467c985 (feat nuevo alias)

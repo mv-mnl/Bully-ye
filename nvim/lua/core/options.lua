@@ -20,3 +20,5 @@ opt.smartcase = true          -- ...salvo que escribas en mayúscula
 opt.updatetime = 250          -- Actualización más rápida para mejor experiencia
 opt.termguicolors = true      -- Activar colores verdaderos
 opt.signcolumn = "yes"        -- Mostrar siempre columna para iconos/git
+opt.keymodel = "startsel,stopsel" -- Selección con Shift y flechas
+opt.selectmode = "mouse,key"    -- Reemplazar al escribir sobre selección
