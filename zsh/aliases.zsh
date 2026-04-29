@@ -76,8 +76,3 @@ alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-
-
-#quiero poder abrir antigravity en una carpeta con ag ./nombre_carpeta y poder cerrar la terminal  
-
-alias ag='~/app/Antigravity/antigravity "$1" > /dev/null 2>&1 & disown; exit'
