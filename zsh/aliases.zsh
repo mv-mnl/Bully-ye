@@ -75,3 +75,11 @@ alias venv='python3 -m venv'
 alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
+<<<<<<< HEAD
+=======
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+
+
+alias coding='antigravity . && exit'
+>>>>>>> 467c985 (feat nuevo alias)

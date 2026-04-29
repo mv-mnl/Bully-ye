@@ -65,3 +65,6 @@ Este documento detalla los alias y funciones configurados en este entorno para m
 *   `df`: Uso de disco en formato legible.
 *   `free`: Estado de la memoria RAM en MB.
 *   `update-grub`: Actualiza la configuración del cargador de arranque Grub.
+
+
+
