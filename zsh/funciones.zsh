@@ -63,14 +63,12 @@ gco() {
 }
 
 
-antigravity() {
+function antigravity() {
     # 1. Ejecuta la app con los argumentos que le pases (ej. el punto para abrir la carpeta actual)
     # Mandamos los logs al vacío para que no ensucien la terminal antes de cerrar
-    ~/app/antigravity/antigravity "$@" > /dev/null 2>&1 &
+    ~/app/Antigravity/antigravity "$@" > /dev/null 2>&1 &
     
     # 2. Desvincula el proceso de la terminal (evita que muera al cerrar la shell)
     disown
     
-    # 3. Cierra la terminal de inmediato
-    exit
 }
