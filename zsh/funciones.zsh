@@ -64,11 +64,28 @@ gco() {
 
 
 function antigravity() {
-    # 1. Ejecuta la app con los argumentos que le pases (ej. el punto para abrir la carpeta actual)
-    # Mandamos los logs al vacío para que no ensucien la terminal antes de cerrar
-    ~/app/Antigravity/antigravity "$@" > /dev/null 2>&1 &
     
-    # 2. Desvincula el proceso de la terminal (evita que muera al cerrar la shell)
-    disown
+    nohup ~/app/Antigravity/antigravity "$@" >/dev/null 2>&1 &
     
+    
+    kill -9 $$
+}
+
+# Ver espacio en disco y qué está ocupando almacenamiento
+espacio() {
+  echo -e "\n\e[1;36m=== ESPACIO TOTAL EN DISCOS ===\e[0m"
+  # Muestra los discos reales, excluyendo sistemas de archivos temporales o snaps
+  df -hT -x tmpfs -x devtmpfs -x squashfs 2>/dev/null || df -h
+  
+  echo -e "\n\e[1;36m=== TOP 10 ARCHIVOS/CARPETAS MÁS PESADOS EN: \e[1;32m$(pwd)\e[0m \e[1;36m===\e[0m"
+  # Calcula el tamaño del directorio actual y su contenido (1 nivel de profundidad)
+  du -ah --max-depth=1 2>/dev/null | sort -rh | head -n 11
+  
+  echo ""
+  # Sugerencia de una herramienta mejor si está instalada
+  if command -v ncdu &> /dev/null; then
+    echo -e "\e[1;33m💡 Tip: Tienes instalado 'ncdu'. Escribe 'ncdu' para analizar el espacio interactivamente.\e[0m\n"
+  else
+    echo -e "\e[1;30m💡 Tip: Puedes instalar 'ncdu' para explorar el espacio de forma interactiva.\e[0m\n"
+  fi
 }

@@ -76,3 +76,7 @@ alias venv-on='source bin/activate'
 alias venv-off='deactivate'
 
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+
+alias limpiar='sudo pacman -Rs $(pacman -Qtdq); sudo paccache -r; sudo journalctl --vacuum-time=3d'
+alias optimizar='echo "--- Borrando huérfanos ---" && sudo pacman -Rns $(pacman -Qtdq) || echo "Sin huérfanos"; echo "--- Limpiando caché ---" && sudo paccache -rvk2; echo "--- Limpiando logs ---" && sudo journalctl --vacuum-size=50M'
