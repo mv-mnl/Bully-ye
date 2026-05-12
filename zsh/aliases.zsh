@@ -1,6 +1,6 @@
 # --- Aliases ---
 # Sistema base
-alias claude='\$HOME/.local/bin/claude'
+alias claude='$HOME/.local/bin/claude'
 alias update='sudo pacman -Syu'    
 alias shutdown='shutdown now'
 alias grep='grep --color=auto'
