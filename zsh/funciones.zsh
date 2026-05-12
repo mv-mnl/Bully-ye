@@ -71,21 +71,62 @@ function antigravity() {
     kill -9 $$
 }
 
-# Ver espacio en disco y qué está ocupando almacenamiento
+# Ver espacio en disco y qué está ocupando almacenamiento (Versión Pro)
 espacio() {
-  echo -e "\n\e[1;36m=== ESPACIO TOTAL EN DISCOS ===\e[0m"
-  # Muestra los discos reales, excluyendo sistemas de archivos temporales o snaps
-  df -hT -x tmpfs -x devtmpfs -x squashfs 2>/dev/null || df -h
+  local cyan="\e[1;36m"
+  local green="\e[1;32m"
+  local yellow="\e[1;33m"
+  local red="\e[1;31m"
+  local reset="\e[0m"
+  local dim="\e[2m"
+  local bold="\e[1m"
+
+  echo -e "\n${cyan}╭───────────────────────────────────────────────────────╮${reset}"
+  echo -e "${cyan}│${reset} 💽 ${bold}ESTADO DE LOS DISCOS PRINCIPALES${reset}                    ${cyan}│${reset}"
+  echo -e "${cyan}╰───────────────────────────────────────────────────────╯${reset}\n"
   
-  echo -e "\n\e[1;36m=== TOP 10 ARCHIVOS/CARPETAS MÁS PESADOS EN: \e[1;32m$(pwd)\e[0m \e[1;36m===\e[0m"
-  # Calcula el tamaño del directorio actual y su contenido (1 nivel de profundidad)
-  du -ah --max-depth=1 2>/dev/null | sort -rh | head -n 11
+  # Formatea la salida de df para que quede perfectamente alineada y con colores dinámicos
+  df -hT -x tmpfs -x devtmpfs -x squashfs 2>/dev/null | awk '
+  NR==1 {
+    printf "  \033[1;34m%-16s %-10s %-8s %-8s %-8s %s\033[0m\n", "SISTEMA", "TIPO", "TOTAL", "USADO", "LIBRE", "USO%"
+    print "  \033[2m------------------------------------------------------------------\033[0m"
+  }
+  NR>1 {
+    color = "\033[1;32m"
+    uso = $6 + 0
+    if (uso > 75) color = "\033[1;33m"
+    if (uso > 90) color = "\033[1;31m"
+    
+    printf "  %-16s %-10s %-8s %-8s %-8s " color "%-5s\033[0m %s\n", substr($1,1,15), substr($2,1,9), $3, $4, $5, $6, $7
+  }'
   
+  echo -e "\n${yellow}╭───────────────────────────────────────────────────────╮${reset}"
+  echo -e "${yellow}│${reset} 📂 ${bold}TOP 10 MÁS PESADOS EN EL DIRECTORIO ACTUAL${reset}          ${yellow}│${reset}"
+  echo -e "${yellow}╰───────────────────────────────────────────────────────╯${reset}"
+  echo -e "  📍 ${dim}Ruta: ${green}$PWD${reset}\n"
+  
+  # Formatea la salida de du para destacar el peso
+  du -ah --max-depth=1 2>/dev/null | sort -rh | head -n 11 | awk '
+  NR==1 {
+    printf "  \033[1;34m%-10s %s\033[0m\n", "TAMAÑO", "ARCHIVO / CARPETA (TOTAL)"
+    print "  \033[2m------------------------------------------------------------------\033[0m"
+    printf "  \033[1;31m%-10s\033[0m %s\n", $1, $2
+  }
+  NR>1 {
+    printf "  \033[1;33m%-10s\033[0m %s\n", $1, $2
+  }'
+
   echo ""
-  # Sugerencia de una herramienta mejor si está instalada
-  if command -v ncdu &> /dev/null; then
-    echo -e "\e[1;33m💡 Tip: Tienes instalado 'ncdu'. Escribe 'ncdu' para analizar el espacio interactivamente.\e[0m\n"
+  
+  # Tips inteligentes dependiendo de qué herramientas estén instaladas
+  if command -v dust &> /dev/null; then
+    echo -e "  🚀 ${green}Tip:${reset} Tienes ${bold}dust${reset} instalado. ¡Escribe 'dust' para una vista de árbol brutal!"
+  elif command -v ncdu &> /dev/null; then
+    echo -e "  💡 ${yellow}Tip:${reset} Tienes ${bold}ncdu${reset}. Escribe 'ncdu' para navegar interactivamente."
+  elif command -v btop &> /dev/null; then
+    echo -e "  📊 ${blue}Tip:${reset} Tienes ${bold}btop${reset}. Úsalo y ve a la pestaña 'disks' para más detalles."
   else
-    echo -e "\e[1;30m💡 Tip: Puedes instalar 'ncdu' para explorar el espacio de forma interactiva.\e[0m\n"
+    echo -e "  🛠️  ${dim}Tip: Te recomiendo instalar 'ncdu' o 'dust' para un análisis súper interactivo.${reset}"
   fi
+  echo ""
 }

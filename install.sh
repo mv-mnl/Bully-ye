@@ -68,6 +68,8 @@ PACKAGES=(
     "gst-plugins-good"
     "gst-plugins-bad"
     "gst-plugins-ugly"
+    "spotify"
+    "spicetify-cli"
 )
 
 echo -e "${BLUE}Paquetes a instalar:${NC} ${PACKAGES[*]}"

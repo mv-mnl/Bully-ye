@@ -1,0 +1,101 @@
+:root {
+  --glitch-color-1: #39FF14; /* Neon Green */
+  --glitch-color-2: #B026FF; /* Neon Purple */
+}
+
+/* Títulos principales con degradado y brillo */
+.main-entityHeader-title {
+  background: linear-gradient(45deg, var(--glitch-color-1), var(--glitch-color-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+}
+
+/* Tarjetas (Cards) de listas y álbumes: Bordes redondeados y efecto hover flotante */
+.main-card-card {
+  background: rgba(20, 20, 30, 0.6) !important;
+  border-radius: 16px;
+  border: 1px solid rgba(176, 38, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-card-card:hover {
+  background: rgba(30, 30, 45, 0.8) !important;
+  border-color: rgba(57, 255, 20, 0.5);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(57, 255, 20, 0.15);
+}
+
+/* Botón de Play gigante */
+.main-playButton-PlayButton {
+  background: linear-gradient(135deg, var(--glitch-color-1), var(--glitch-color-2)) !important;
+  color: #000 !important;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+  transition: all 0.3s ease;
+  border-radius: 50% !important;
+}
+
+.main-playButton-PlayButton span {
+  background: transparent !important;
+}
+
+.main-playButton-PlayButton:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 25px rgba(176, 38, 255, 0.5);
+}
+
+/* Barra de progreso de la canción en reproducción */
+.x-progressBar-fillColor {
+  background: linear-gradient(90deg, var(--glitch-color-1), var(--glitch-color-2)) !important;
+  box-shadow: 0 0 12px var(--glitch-color-2);
+}
+
+.x-progressBar-progressBarBg {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover en las canciones de la lista */
+.main-trackList-trackListRow:hover {
+  background-color: rgba(176, 38, 255, 0.1) !important;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.05);
+}
+
+/* Elemento seleccionado en la barra lateral */
+.main-navBar-navBarLinkActive {
+  background: linear-gradient(90deg, rgba(57, 255, 20, 0.1), transparent) !important;
+  border-left: 4px solid var(--glitch-color-1);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Personalización de la barra de desplazamiento (Scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--glitch-color-1), var(--glitch-color-2)) !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--glitch-color-2), var(--glitch-color-1)) !important;
+}
+
+/* Animaciones de íconos y botones pequeños al hacer hover */
+button:hover > svg,
+.main-addButton-button:hover,
+.main-moreButton-button:hover {
+  color: var(--glitch-color-1) !important;
+  filter: drop-shadow(0 0 8px var(--glitch-color-1));
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+
+/* Barra inferior del reproductor con estilo Glassmorphism */
+.main-nowPlayingBar-nowPlayingBar {
+  border-top: 1px solid rgba(176, 38, 255, 0.2);
+  background: rgba(9, 9, 14, 0.85);
+  backdrop-filter: blur(15px);
+}
+
+/* Pequeños detalles redondeados a la vista principal */
+.main-view-container__scroll-node-child {
+  padding-bottom: 24px;
+}

@@ -62,6 +62,20 @@ echo -e "\n${BLUE}--- Archivos de KDE / Dolphin ---${NC}"
 create_symlink "$DOTFILES_DIR/dolphin/kdeglobals" "$CONFIG_DIR/kdeglobals"
 create_symlink "$DOTFILES_DIR/dolphin/dolphinrc" "$CONFIG_DIR/dolphinrc"
 
+echo -e "\n${BLUE}--- Spicetify ---${NC}"
+mkdir -p "$CONFIG_DIR/spicetify/Themes"
+create_symlink "$DOTFILES_DIR/spicetify_theme" "$CONFIG_DIR/spicetify/Themes/cyber"
+
+# Aplicar el tema si spicetify está instalado
+if command -v spicetify &> /dev/null; then
+    echo -e "${YELLOW}Configurando tema cyber en Spicetify...${NC}"
+    spicetify config current_theme cyber
+    spicetify config color_scheme cyber
+    echo -e "${GREEN}Configuración de Spicetify actualizada. Recuerda ejecutar 'spicetify backup apply' si es la primera vez.${NC}"
+else
+    echo -e "${RED}[Advertencia]${NC} spicetify no está instalado. Instálalo para aplicar el tema de Spotify."
+fi
+
 echo -e "\n${YELLOW}--- SDDM y Plymouth ---${NC}"
 echo -e "Estos requieren privilegios de administrador (sudo) para instalarse en el sistema."
 echo -e "Si deseas instalarlos, puedes correr manualmente:"
